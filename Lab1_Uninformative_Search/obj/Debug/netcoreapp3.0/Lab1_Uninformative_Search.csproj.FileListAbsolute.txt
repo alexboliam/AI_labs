@@ -1,0 +1,11 @@
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\bin\Debug\netcoreapp3.0\Lab1_Uninformative_Search.exe
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\bin\Debug\netcoreapp3.0\Lab1_Uninformative_Search.deps.json
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\bin\Debug\netcoreapp3.0\Lab1_Uninformative_Search.runtimeconfig.json
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\bin\Debug\netcoreapp3.0\Lab1_Uninformative_Search.runtimeconfig.dev.json
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\bin\Debug\netcoreapp3.0\Lab1_Uninformative_Search.dll
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\bin\Debug\netcoreapp3.0\Lab1_Uninformative_Search.pdb
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\obj\Debug\netcoreapp3.0\Lab1_Uninformative_Search.csprojAssemblyReference.cache
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\obj\Debug\netcoreapp3.0\Lab1_Uninformative_Search.AssemblyInfoInputs.cache
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\obj\Debug\netcoreapp3.0\Lab1_Uninformative_Search.AssemblyInfo.cs
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\obj\Debug\netcoreapp3.0\Lab1_Uninformative_Search.dll
+D:\KPI\3_course\AI\Lab1_Uninformative_Search\obj\Debug\netcoreapp3.0\Lab1_Uninformative_Search.pdb
