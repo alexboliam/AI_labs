@@ -6,13 +6,12 @@ namespace Lab1_Uninformative_Search
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
 
-            Solver solver = new Solver();
-            var path = solver.IDDFS(new GangStateNode());
+            Solver solver = new Solver(); // создаем решатор
+            var path = solver.IDDFS(new GangStateNode()); // решаем задачу, возвращается путь
 
             int n = 1;
-            foreach (var state in path)
+            foreach (var state in path) // выводим путь в консоль 
             {
                 GangStateNode nextState = state;
 
