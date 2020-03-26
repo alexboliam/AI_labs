@@ -24,8 +24,10 @@ namespace Lab1_Uninformative_Search
             else if (depth > 0) 
             {
                 var moves = node.GetPossibleMoves(); // высчитываем все возможные ходы из данного состояния
+                
                 foreach (var child in moves) // рекурсивного проходим по ним до заданной глубины, проверяем на наличие искомого состояния
                 {
+                    if (child.Equals(node.Parent)) continue;
                     var result = DLS(child, depth - 1);
                     if (result != null) return result;
                     else continue;

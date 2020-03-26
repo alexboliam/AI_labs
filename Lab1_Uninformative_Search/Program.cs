@@ -20,7 +20,7 @@ namespace Lab1_Uninformative_Search
                 if (nextState.IsSolution())
                     Console.WriteLine("Solution");
 
-                Console.WriteLine(nextState.ToString());
+                Console.WriteLine(nextState.MyToString());
                 n++;
             }
 
