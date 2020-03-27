@@ -8,17 +8,23 @@ namespace Lab1_Uninformative_Search
 {
     public class GangStateNode
     {
-        public enum MoveDir { ToLeft, ToRight }
-        public MoveDir LastMoveDir { get; set; }
+        #region Properties
+        public enum MoveDir { ToLeft, ToRight } // перечисление для отображения направления движения
+        public MoveDir LastMoveDir { get; set; } // направление движения на этом шаге
+        public GangStateNode Parent { get; set; } // родительский шаг
 
-        private Side Unit1 = new Side(Side.SideEnum.Left);
-        private Side SubUnit1 = new Side(Side.SideEnum.Left);
+        // наши махараджи
+        private Side Unit1 = new Side(Side.SideEnum.Left);   
         private Side Unit2 = new Side(Side.SideEnum.Left);
-        private Side SubUnit2 = new Side(Side.SideEnum.Left);
         private Side Unit3 = new Side(Side.SideEnum.Left);
+
+        // наши пери
+        private Side SubUnit1 = new Side(Side.SideEnum.Left);
+        private Side SubUnit2 = new Side(Side.SideEnum.Left);
         private Side SubUnit3 = new Side(Side.SideEnum.Left);
-        public GangStateNode Parent { get; set; }
-        
+        #endregion
+
+        #region Ctors
         public GangStateNode()
         {
 
@@ -37,56 +43,63 @@ namespace Lab1_Uninformative_Search
             this.Unit3 = Unit3;
             this.SubUnit3 = SubUnit3;
         }
+        #endregion
 
-        public bool IsSolution()
+        #region Methods
+        public bool IsSolution() // проверка, является ли шаг искомым
         {
             return Unit1.CurrentSide == Side.SideEnum.Right && SubUnit1.CurrentSide == Side.SideEnum.Right && 
                    Unit2.CurrentSide == Side.SideEnum.Right && SubUnit2.CurrentSide == Side.SideEnum.Right &&
                    Unit3.CurrentSide == Side.SideEnum.Right && SubUnit3.CurrentSide == Side.SideEnum.Right;
         }
-        private void CheckAndAdd(LinkedList<GangStateNode> moves)
+        private void CheckAndAdd(LinkedList<GangStateNode> moves) // проверка шага на допустимость, запись направления движения в нем
         {
-            //bool check = (Unit1.CurrentSide != SubUnit2.CurrentSide && Unit1.CurrentSide != SubUnit3.CurrentSide) &&
-            //              (Unit2.CurrentSide != SubUnit1.CurrentSide && Unit2.CurrentSide != SubUnit3.CurrentSide) &&
-            //              (Unit3.CurrentSide != SubUnit1.CurrentSide && Unit3.CurrentSide != SubUnit2.CurrentSide);
+            // проверка размещения пери только со своими махараджи
             bool check = (Unit1.CurrentSide != SubUnit1.CurrentSide && (SubUnit1.CurrentSide == Unit2.CurrentSide || SubUnit1.CurrentSide == Unit3.CurrentSide))
                       || (Unit2.CurrentSide != SubUnit2.CurrentSide && (SubUnit2.CurrentSide == Unit1.CurrentSide || SubUnit2.CurrentSide == Unit3.CurrentSide))
                       || (Unit3.CurrentSide != SubUnit3.CurrentSide && (SubUnit3.CurrentSide == Unit2.CurrentSide || SubUnit3.CurrentSide == Unit1.CurrentSide));
 
+            // если они не находятся с чужими махараджи без своего
             if (!check) {
-                if (this.Parent == null)
-                    this.LastMoveDir = MoveDir.ToLeft; // допустим, начальное состояние такое (для метода рассчета направления)
+                if (this.Parent == null) // если шаг начальный
+                    this.LastMoveDir = MoveDir.ToLeft; // допустим, начальное направление такое (для дальнейшего рассчета направлений)
                 else
                 {
-                    SetDirection();
-                    if(!CheckMoveDirs())
+                    // устанавливаем шагу направление движения
+                    SetDirection(); 
+                    if(!CheckMoveDirs()) /// ПРОВЕРЯЕМ НА ОГРАНИЧЕНИЯ "ЛОДКИ" ///
                     {
-                        return;
+                        return; // если шаг нарушает правила перемещения лодки, пропускаем его
                     }
                 }
                     
-                moves.AddLast(this); 
+                moves.AddLast(this); // если все хорошо, добавляем шаг для рассмотрения
             }
-            else
+            else // если кто то из пери находится с чужим махараджи
             {
-                return;
+                return; // пропускаем шаг
             }
             
         }
-        private bool CheckMoveDirs()
+        private bool CheckMoveDirs() // проверяем условия перемещения на лодке
         {
+            // считаем сколько человек на какой стороне на даном шаге и на прошлом
             int leftcount = this.ToString().Count(x => x == 'L');
             int rightcount = this.ToString().Count(x => x == 'R');
             int leftperent = this.Parent.ToString().Count(x => x == 'L');
             int rightperent = this.Parent.ToString().Count(x => x == 'R');
+
+            // если на даном шаге перемещение было влево, то количество людей на правом берегу не могло уменьшится или остаться таким же
             if (this.LastMoveDir == MoveDir.ToLeft && rightcount >= rightperent)
             {
                 return false;
             }
+            //количество людей на берегах не может оставаться таким же
             if (leftcount == leftperent && rightcount == rightperent)
             {
                 return false;
             }
+            // если на даном шаге перемещение было вправо, то количество людей на левом берегу не могло уменьшится или остаться таким же
             if (this.LastMoveDir == MoveDir.ToRight && leftcount >= leftperent)
             {
                 return false;
@@ -94,14 +107,14 @@ namespace Lab1_Uninformative_Search
 
             return true;
         }
-        private void SetDirection()
+        private void SetDirection() // устанавливаем направление движения на данном шаге
         {
             if (this.Parent.LastMoveDir == MoveDir.ToLeft)
                 this.LastMoveDir = MoveDir.ToRight;
             else
                 this.LastMoveDir = MoveDir.ToLeft;
         }
-        private string SideToString(Side side)
+        private string SideToString(Side side) // переводим перечисление в строку для вывода
         {
             return side.CurrentSide == Side.SideEnum.Left ? "L" : "R";
         }
@@ -133,7 +146,7 @@ namespace Lab1_Uninformative_Search
             
             return solution;
         }
-        public string MyToString()
+        public string MyToString() // второй метод на преобразование шага в строку
         {
             string solution = string.Empty;
 
@@ -154,127 +167,144 @@ namespace Lab1_Uninformative_Search
 
             return solution;
         }
-        public LinkedList<GangStateNode> GetPossibleMoves()
+        public LinkedList<GangStateNode> GetPossibleMoves() // создание возможных шагов из текущего состояния
         {
-            LinkedList<GangStateNode> moves = new LinkedList<GangStateNode>();
+            LinkedList<GangStateNode> moves = new LinkedList<GangStateNode>(); // связный список из возможных шагов
 
-            if (Unit1.CurrentSide == SubUnit1.CurrentSide)
+            if (Unit1.CurrentSide == SubUnit1.CurrentSide) // если первый М и П находятся на одной стороне, они могут вдвоем переместится
             {
                 (new GangStateNode(
                     this,
                     new Side(Unit1.ChangeSide()), new Side(SubUnit1.ChangeSide()),
                     Unit2, SubUnit2,
-                    Unit3, SubUnit3)).CheckAndAdd(moves);
+                    Unit3, SubUnit3)).CheckAndAdd(moves); // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (Unit2.CurrentSide == SubUnit2.CurrentSide)
+            if (Unit2.CurrentSide == SubUnit2.CurrentSide) // если второй М и П находятся на одной стороне, они могут вдвоем переместится
             {
                 (new GangStateNode(
                     this,
                     Unit1, SubUnit1,
                     new Side(Unit2.ChangeSide()), new Side(SubUnit2.ChangeSide()),
-                    Unit3, SubUnit3)).CheckAndAdd(moves);
+                    Unit3, SubUnit3)).CheckAndAdd(moves);// проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (Unit3.CurrentSide == SubUnit3.CurrentSide)
+            if (Unit3.CurrentSide == SubUnit3.CurrentSide)// если третий М и П находятся на одной стороне, они могут вдвоем переместится
             {
                 (new GangStateNode(
                     this,
                     Unit1, SubUnit1,
                     Unit2, SubUnit2,
                     new Side(Unit1.ChangeSide()), new Side(SubUnit1.ChangeSide()))).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (Unit1.CurrentSide == Unit2.CurrentSide)
+            if (Unit1.CurrentSide == Unit2.CurrentSide) // два махараджи тоже могут переплыть
             {
                 (new GangStateNode(
                     this,
                     new Side(Unit1.ChangeSide()), SubUnit1,
                     new Side(Unit2.ChangeSide()), SubUnit2,
                     Unit3, SubUnit3)).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
 
-            if (Unit1.CurrentSide == Unit3.CurrentSide)
+            if (Unit1.CurrentSide == Unit3.CurrentSide) // два махараджи тоже могут переплыть
             {
                 (new GangStateNode(
                     this,
                     new Side(Unit1.ChangeSide()), SubUnit1,
                     Unit2, SubUnit2,
                     new Side(Unit3.ChangeSide()), SubUnit3)).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
 
-            if (Unit2.CurrentSide == Unit3.CurrentSide)
+            if (Unit2.CurrentSide == Unit3.CurrentSide) // два махараджи тоже могут переплыть
             {
                 (new GangStateNode(
                     this,
                     Unit1, SubUnit1,
                     new Side(Unit2.ChangeSide()), SubUnit2,
                     new Side(Unit3.ChangeSide()), SubUnit3)).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (SubUnit1.CurrentSide == SubUnit2.CurrentSide)
+            if (SubUnit1.CurrentSide == SubUnit2.CurrentSide) // два пери тоже могут переплыть
             {
                 (new GangStateNode(
                     this,
                     Unit1, new Side(SubUnit1.ChangeSide()),
                     Unit2, new Side(SubUnit2.ChangeSide()),
                     Unit3, SubUnit3)).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (SubUnit1.CurrentSide == SubUnit3.CurrentSide)
+            if (SubUnit1.CurrentSide == SubUnit3.CurrentSide)// два пери тоже могут переплыть
             {
                 (new GangStateNode(
                     this,
                     Unit1, new Side(SubUnit1.ChangeSide()),
                     Unit2, SubUnit2,
                     Unit3, new Side(SubUnit3.ChangeSide()))).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (SubUnit2.CurrentSide == SubUnit3.CurrentSide)
+            if (SubUnit2.CurrentSide == SubUnit3.CurrentSide)// два пери тоже могут переплыть
             {
                 (new GangStateNode(
                     this,
                     Unit1, new Side(SubUnit1.ChangeSide()),
                     Unit2, SubUnit2,
                     Unit3, new Side(SubUnit3.ChangeSide()))).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if(Unit1.CurrentSide != SubUnit1.CurrentSide)
+            if (Unit1.CurrentSide != SubUnit1.CurrentSide) // если махараджи не со своим пери, то он может один к нему поплыть
             {
                 (new GangStateNode(this, new Side(Unit1.ChangeSide()), SubUnit1,
                                                      Unit2, SubUnit2,
                                                      Unit3, SubUnit3)).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (Unit2.CurrentSide != SubUnit2.CurrentSide)
+            if (Unit2.CurrentSide != SubUnit2.CurrentSide) // если махараджи не со своим пери, то он может один к нему поплыть
             {
                 (new GangStateNode(this, Unit1, SubUnit1,
                                            new Side(Unit2.ChangeSide()), SubUnit2,
                                            Unit3, SubUnit3)).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
 
-            if (Unit3.CurrentSide != SubUnit3.CurrentSide)
+            if (Unit3.CurrentSide != SubUnit3.CurrentSide) // если махараджи не со своим пери, то он может один к нему поплыть
             {
                 (new GangStateNode(this, Unit1, SubUnit1,
                                            Unit2, SubUnit2,
                                            new Side(Unit3.ChangeSide()), SubUnit3)).CheckAndAdd(moves);
+                // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
             }
-                
+
+            // пери может самостоятельно переправится через реку
             (new GangStateNode(this, Unit1, new Side(SubUnit1.ChangeSide()),
                                            Unit2, SubUnit2,
                                            Unit3, SubUnit3)).CheckAndAdd(moves);
+            // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
 
+            // пери может самостоятельно переправится через реку
             (new GangStateNode(this, Unit1, SubUnit1,
                                            Unit2, new Side(SubUnit2.ChangeSide()),
                                            Unit3, SubUnit3)).CheckAndAdd(moves);
+            // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
 
+            // пери может самостоятельно переправится через реку
             (new GangStateNode(this, Unit1, SubUnit1,
                                            Unit2, SubUnit2,
                                            Unit3, new Side(SubUnit3.ChangeSide()))).CheckAndAdd(moves);
+            // проверяем возможность такого перемещения на данный момент в методе CheckAndAdd
 
-            return moves;
+            return moves; // возвращаем все возможные и допустимые шаги
         }
+        #endregion
     }
 }
