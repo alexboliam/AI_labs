@@ -1,0 +1,11 @@
+D:\KPI\3_course\AI\Lab2_Informative_Search\bin\Debug\netcoreapp3.0\Lab2_Informative_Search.exe
+D:\KPI\3_course\AI\Lab2_Informative_Search\bin\Debug\netcoreapp3.0\Lab2_Informative_Search.deps.json
+D:\KPI\3_course\AI\Lab2_Informative_Search\bin\Debug\netcoreapp3.0\Lab2_Informative_Search.runtimeconfig.json
+D:\KPI\3_course\AI\Lab2_Informative_Search\bin\Debug\netcoreapp3.0\Lab2_Informative_Search.runtimeconfig.dev.json
+D:\KPI\3_course\AI\Lab2_Informative_Search\bin\Debug\netcoreapp3.0\Lab2_Informative_Search.dll
+D:\KPI\3_course\AI\Lab2_Informative_Search\bin\Debug\netcoreapp3.0\Lab2_Informative_Search.pdb
+D:\KPI\3_course\AI\Lab2_Informative_Search\obj\Debug\netcoreapp3.0\Lab2_Informative_Search.csprojAssemblyReference.cache
+D:\KPI\3_course\AI\Lab2_Informative_Search\obj\Debug\netcoreapp3.0\Lab2_Informative_Search.AssemblyInfoInputs.cache
+D:\KPI\3_course\AI\Lab2_Informative_Search\obj\Debug\netcoreapp3.0\Lab2_Informative_Search.AssemblyInfo.cs
+D:\KPI\3_course\AI\Lab2_Informative_Search\obj\Debug\netcoreapp3.0\Lab2_Informative_Search.dll
+D:\KPI\3_course\AI\Lab2_Informative_Search\obj\Debug\netcoreapp3.0\Lab2_Informative_Search.pdb
