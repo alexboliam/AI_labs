@@ -13,5 +13,10 @@ namespace Lab3_Local_Search
         {
             this.UpperSide = side;
         }
+
+        public void ChangeSide()
+        {
+            this.UpperSide = this.UpperSide == Side.Eagle ? Side.Tails : Side.Eagle;
+        }
     }
 }

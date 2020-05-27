@@ -1,0 +1,13 @@
+﻿#include @"depth\depth.ph"
+
+% privately used packages
+#include @"pfc\varM\varM.ph"
+#include @"pfc\list\list.ph"
+#include @"pfc\core.ph"
+
+% private interfaces
+
+% private classes
+
+% implementations
+#include @"depth\depth.pro"

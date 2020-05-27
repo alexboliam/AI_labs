@@ -25,7 +25,12 @@ namespace Lab3_Local_Search
             this.ThirdCoin = third;
         }
 
+        List<CoinsState> FindMoves(CoinsState state)
+        {
+            List<CoinsState> states = new List<CoinsState>();
 
+
+        }
 
 
     }
