@@ -1,0 +1,13 @@
+D:\KPI\3_course\AI\Lab3_Local_Search\bin\Debug\netcoreapp3.1\Lab3_Local_Search.exe
+D:\KPI\3_course\AI\Lab3_Local_Search\bin\Debug\netcoreapp3.1\Lab3_Local_Search.deps.json
+D:\KPI\3_course\AI\Lab3_Local_Search\bin\Debug\netcoreapp3.1\Lab3_Local_Search.runtimeconfig.json
+D:\KPI\3_course\AI\Lab3_Local_Search\bin\Debug\netcoreapp3.1\Lab3_Local_Search.runtimeconfig.dev.json
+D:\KPI\3_course\AI\Lab3_Local_Search\bin\Debug\netcoreapp3.1\Lab3_Local_Search.dll
+D:\KPI\3_course\AI\Lab3_Local_Search\bin\Debug\netcoreapp3.1\Lab3_Local_Search.pdb
+D:\KPI\3_course\AI\Lab3_Local_Search\obj\Debug\netcoreapp3.1\Lab3_Local_Search.csprojAssemblyReference.cache
+D:\KPI\3_course\AI\Lab3_Local_Search\obj\Debug\netcoreapp3.1\Lab3_Local_Search.csproj.CoreCompileInputs.cache
+D:\KPI\3_course\AI\Lab3_Local_Search\obj\Debug\netcoreapp3.1\Lab3_Local_Search.AssemblyInfoInputs.cache
+D:\KPI\3_course\AI\Lab3_Local_Search\obj\Debug\netcoreapp3.1\Lab3_Local_Search.AssemblyInfo.cs
+D:\KPI\3_course\AI\Lab3_Local_Search\obj\Debug\netcoreapp3.1\Lab3_Local_Search.dll
+D:\KPI\3_course\AI\Lab3_Local_Search\obj\Debug\netcoreapp3.1\Lab3_Local_Search.pdb
+D:\KPI\3_course\AI\Lab3_Local_Search\obj\Debug\netcoreapp3.1\Lab3_Local_Search.genruntimeconfig.cache

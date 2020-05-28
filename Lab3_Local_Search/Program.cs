@@ -6,7 +6,7 @@ namespace Lab3_Local_Search
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BeamSearch.Bms(3);
         }
     }
 }
